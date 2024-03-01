@@ -18,8 +18,8 @@ ProductTag.init(
     product_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: Product,
-        key: 'id'
+        model: 'product',
+        key: 'product_id'
 
       }
 
@@ -27,8 +27,8 @@ ProductTag.init(
     tag_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: Tag,
-        key: 'id'
+        model: 'tag',
+        key: 'tag_id'
       }
     }
     // define columns
