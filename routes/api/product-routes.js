@@ -57,11 +57,12 @@ router.post('/', async (req, res) => {
       stock
     });
     if (tagIds && tagIds.length > 0) {
+      console.log(product.product_id)
       const productTagIdArr =  tagIds.map((tag_id) => ({
-        product_id: product.id,
+        product_id: product.product_id,
         tag_id
       }));
-      
+      console.log(productTagIdArr)
       await ProductTag.bulkCreate(productTagIdArr);
     }
 
