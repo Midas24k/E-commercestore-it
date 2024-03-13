@@ -51,14 +51,14 @@ router.put('/:id', async (req, res) => {
   console.log("Params: ", req.params);   // --> :id
   console.log("Body Data: ", req.body);   // --> { category_name : ""}
   try {
-    const categoryData = await Category.update(req.body, {
+    const categoryData = await Category.update(req.body,{
       where: {
         category_id: req.params.id
       }
     })
     console.log("Updated Data: ", categoryData);
     res.status(200).json(categoryData);
-    // res.send('Successfully updated a product catagory');
+    // res.send('Successfully updated a product category');
   } catch(error) {
     console.log("Error: ", error)
     res.status(500).json(error);

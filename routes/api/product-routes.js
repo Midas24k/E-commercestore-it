@@ -81,7 +81,7 @@ router.put('/:id',  (req, res) => {
       id: req.params.id,
     },
   })
-    .then((product) => {
+    .then(([rowsUpdate, [updatedProduct]]) => {
       if (req.body.tagIds && req.body.tagIds.length) {
         
         ProductTag.findAll({
@@ -106,11 +106,11 @@ router.put('/:id',  (req, res) => {
           return Promise.all([
             ProductTag.destroy({ where: { id: productTagsToRemove } }),
             ProductTag.bulkCreate(newProductTags),
-          ]);
+          ]).then(() => updatedProduct);
         });
+      } else {
+        res.json(updatedProduct);
       }
-
-      return res.json(product);
     })
     .catch((err) => {
       // console.log(err);
@@ -122,7 +122,7 @@ router.delete('/:id', async (req, res) => {
   try {
     const productData = await Product.destroy({
       where: {
-        id: req.prarams
+       product_id: req.params.id
         // delete one product by its `id` value
       }
     });
